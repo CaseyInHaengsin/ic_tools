@@ -43,7 +43,6 @@ def create_account():
         return redirect(url_for('index'))
     form = RegisterForm()
     if form.validate_on_submit():
-
         user = User()
         user.username = form.username.data
         user.password = user.set_password(form.password.data)
@@ -53,7 +52,7 @@ def create_account():
             return redirect(url_for('index'))
         except mongoengine.errors.NotUniqueError:
             flash('You chose a name thats already taken')
-        except mongoengine.errors.ValidationError:
+        except mongoengine.errors.OperationError:
             flash('validation error!')
         return redirect(url_for('create_account'))
     return render_template('createaccount.html', form=form)
