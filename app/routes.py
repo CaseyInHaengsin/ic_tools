@@ -43,7 +43,7 @@ def create_account():
         return redirect(url_for('index'))
     form = RegisterForm()
     if form.validate_on_submit():
-        flash(form.password.data)
+
         user = User()
         user.username = form.username.data
         user.password = user.set_password(form.password.data)
