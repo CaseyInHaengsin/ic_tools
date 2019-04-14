@@ -1,11 +1,9 @@
 from flask import render_template, redirect, request, url_for, flash
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 from app import app
 import mongoengine
 from app.models.user import User
 from app.forms import RegisterForm, LoginForm
-
-
 
 
 
@@ -56,3 +54,8 @@ def create_account():
             flash('validation error!')
         return redirect(url_for('create_account'))
     return render_template('createaccount.html', form=form)
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    pass
